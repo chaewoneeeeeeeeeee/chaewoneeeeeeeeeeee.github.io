@@ -6,262 +6,198 @@
   <title>Project 1 — SilentBridge</title>
 
   <style>
-    :root{
-      --bg:#f7f9ff;
+    :root {
+      --bg:#f4f7ff;
       --card:#ffffff;
       --text:#0f172a;
       --muted:#475569;
       --accent:#2563eb;
-      --border:rgba(15,23,42,.10);
-      --shadow:0 16px 44px rgba(15,23,42,.10);
-      --chip:rgba(37,99,235,.08);
-      --chipText:#1e3a8a;
+      --border:rgba(15,23,42,.12);
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg, rgba(37,99,235,.08), transparent 260px), var(--bg);
       color:var(--text);
-      background:
-        radial-gradient(900px 420px at 20% -10%, rgba(37,99,235,.18), transparent 60%),
-        radial-gradient(700px 360px at 80% 0%, rgba(16,185,129,.10), transparent 55%),
-        var(--bg);
     }
-    a{color:var(--accent)}
-    code{background:rgba(15,23,42,.06);padding:2px 6px;border-radius:8px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
 
     .top{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(1.4) blur(10px);
-      background:rgba(247,249,255,.82);
+      position:sticky;top:0;
+      backdrop-filter:blur(10px);
+      background:rgba(244,247,255,.85);
       border-bottom:1px solid var(--border);
+      z-index:10;
     }
     .nav{
-      max-width:1040px; margin:0 auto; padding:12px 16px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      max-width:1100px;
+      margin:0 auto;
+      padding:12px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .nav .left{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
     .pill{
-      text-decoration:none; color:var(--text);
-      padding:8px 12px; border-radius:999px;
+      padding:8px 12px;
       border:1px solid var(--border);
-      background:rgba(255,255,255,.75);
+      border-radius:999px;
+      background:#fff;
+      font-size:.95rem;
     }
-    .pill:hover{background:#fff}
 
-    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 84px;}
-    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;align-items:stretch}
-    @media (max-width: 880px){.hero{grid-template-columns:1fr}}
-
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 80px;}
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:18px;
-      padding:18px;
-      box-shadow:var(--shadow);
+      padding:20px;
+      box-shadow:0 14px 40px rgba(15,23,42,.08);
     }
-    h1{margin:0 0 8px;font-size:2.1rem;letter-spacing:-.02em}
-    h2{margin:0 0 10px;font-size:1.35rem}
-    p{margin:0 0 10px;line-height:1.65;color:var(--muted)}
-    .small{font-size:.95rem}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    h1{margin:0 0 10px;font-size:2.2rem}
+    h2{margin:0 0 12px;font-size:1.4rem}
+    p{margin:0 0 12px;line-height:1.7;color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:16px;
+    }
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
     .tag{
-      display:inline-block; padding:6px 10px; border-radius:999px;
+      padding:6px 10px;
+      border-radius:999px;
       border:1px solid var(--border);
-      background:var(--chip); color:var(--chipText);
+      background:rgba(37,99,235,.08);
       font-size:.9rem;
     }
-    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-    @media (max-width: 720px){.kpi{grid-template-columns:1fr}}
+
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media(max-width:700px){.kpi{grid-template-columns:1fr}}
     .k{
       border:1px solid var(--border);
       border-radius:14px;
       padding:12px;
-      background:rgba(16,185,129,.06);
+      background:#f0f7ff;
     }
-    .k b{display:block;font-size:1.05rem;color:#0b1220}
-    .k span{color:var(--muted);font-size:.92rem}
+    .k b{display:block}
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
-    .sec{scroll-margin-top:76px}
-    .img{
-      width:100%; height:auto;
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+
+    img{
+      width:100%;
       border-radius:14px;
       border:1px solid var(--border);
-      background:rgba(15,23,42,.04);
-      display:block;
-    }
-    .imgWrap{margin-top:10px}
-    .cap{margin-top:10px;color:var(--muted);font-size:.9rem}
-
-    .fallback{
-      display:none;
       margin-top:10px;
-      padding:12px;
-      border-radius:14px;
-      border:1px dashed rgba(15,23,42,.25);
-      background:rgba(255,255,255,.6);
-      color:var(--muted);
-      font-size:.92rem;
     }
 
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid var(--border);
-      text-decoration:none;
-      background:rgba(37,99,235,.10);
-      color:#0b1220;
+    .footer{
+      margin-top:28px;
+      font-size:.9rem;
+      color:var(--muted);
     }
-    .btn:hover{background:rgba(37,99,235,.16)}
-    .footer{margin-top:22px;color:var(--muted);font-size:.9rem}
   </style>
 </head>
 
 <body>
   <div class="top">
     <div class="nav">
-      <div class="left">
+      <div>
         <a class="pill" href="index.html">← Home</a>
         <a class="pill" href="#overview">Overview</a>
         <a class="pill" href="#method">Method</a>
         <a class="pill" href="#results">Results</a>
         <a class="pill" href="#links">Links</a>
       </div>
-      <div class="left">
-        <a class="pill" href="project2.html">Project 2 →</a>
-      </div>
+      <a class="pill" href="project2.html">Project 2 →</a>
     </div>
   </div>
 
   <div class="wrap">
+
+    <!-- HERO -->
     <div class="hero">
       <div class="card">
         <h1>Project 1 — SilentBridge</h1>
-        <p class="small"><b>Real-time Hand Gesture → Text</b> using a webcam-based pipeline to support communication for deaf and hard-of-hearing users in online environments.</p>
+        <p><b>Real-time Hand Gesture → Text</b> system using a webcam-based computer vision pipeline to support communication for deaf and hard-of-hearing users.</p>
 
-        <div class="meta">
+        <div class="tags">
           <span class="tag">Computer Vision</span>
           <span class="tag">Webcam Inference</span>
           <span class="tag">SVM Classifier</span>
         </div>
 
         <div class="kpi">
-          <div class="k"><b>Goal</b><span>Convert hand gestures into text in real time</span></div>
-          <div class="k"><b>Data</b><span>Collected gesture images via webcam</span></div>
-          <div class="k"><b>Output</b><span>Predicted gesture label → text</span></div>
+          <div class="k"><b>Goal</b>Convert hand gestures into text in real time</div>
+          <div class="k"><b>Data</b>Gesture images collected via webcam</div>
+          <div class="k"><b>Output</b>Predicted gesture label → text</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="imgWrap">
-          <img class="img js-img" alt="Background & problem definition visual"
-               data-candidates="
-                 assets_p1/s02_04_9d9a17e339.png,
-                 assets_p1/s02_9d9a17e339.png,
-                 assets/p1/s02_04_9d9a17e339.png,
-                 assets/s02_04_9d9a17e339.png
-               ">
-          <div class="fallback js-fallback">
-            Image not found. Check that the image file exists in the repo and that the filename/path matches exactly (case-sensitive).
-          </div>
-        </div>
-        <div class="cap">Visuals are adapted from the project presentation (reorganized for web readability).</div>
+        <img src="s02_9d9a17e339.png" alt="Background and problem definition">
+        <p class="footer">Visual adapted from the project presentation.</p>
       </div>
     </div>
 
+    <!-- OVERVIEW / METHOD / IMPLEMENTATION -->
     <div class="grid">
-      <div class="card sec" id="overview">
+      <div class="card" id="overview">
         <h2>Overview</h2>
-        <p>Virtual meetings and online classes are increasing, but deaf and hard-of-hearing individuals can experience communication barriers when the other person does not understand sign language.</p>
-        <p>SilentBridge addresses this gap by detecting hand gestures from a webcam feed and converting them into readable text.</p>
+        <p>Online meetings and virtual classes are increasing, but deaf and hard-of-hearing individuals often face communication barriers.</p>
+        <p>SilentBridge addresses this gap by recognizing hand gestures from a webcam feed and converting them into readable text.</p>
       </div>
 
-      <div class="card sec" id="method">
+      <div class="card" id="method">
         <h2>Method</h2>
-        <p><b>Pipeline</b>: data collection → preprocessing → model training → real-time inference.</p>
-        <p>Images are resized and processed into a model-friendly format. A lightweight classifier (SVM) is used for fast inference and simple deployment.</p>
-
-        <div class="imgWrap">
-          <img class="img js-img" alt="System / pipeline diagram"
-               data-candidates="
-                 assets_p1/s06_02_d8d1753695.png,
-                 assets_p1/s06_d8d1753695.png,
-                 assets/p1/s06_02_d8d1753695.png,
-                 assets/s06_02_d8d1753695.png
-               ">
-          <div class="fallback js-fallback">
-            Image not found. Confirm the file is uploaded (and path/filename matches).
-          </div>
-        </div>
+        <p><b>Pipeline:</b> data collection → preprocessing → model training → real-time inference.</p>
+        <p>A lightweight SVM classifier enables fast inference and simple deployment.</p>
+        <img src="s06_d8d1753695.png" alt="System pipeline diagram">
       </div>
 
       <div class="card">
         <h2>Implementation</h2>
-        <p>The project follows a clear file structure: data collection scripts, training script, and an inference script that runs with a webcam.</p>
-        <p class="small">In class, a live demo was conducted to demonstrate real-time inference. This webpage focuses on summarizing the system structure and results.</p>
-
-        <div class="imgWrap">
-          <img class="img js-img" alt="File structure visual"
-               data-candidates="
-                 assets_p1/s09_02_4d5dd32172.png,
-                 assets_p1/s09_4d5dd32172.png,
-                 assets/p1/s09_02_4d5dd32172.png,
-                 assets/s09_02_4d5dd32172.png
-               ">
-          <div class="fallback js-fallback">
-            Image not found. Confirm upload + exact filename.
-          </div>
-        </div>
+        <p>The system consists of data collection scripts, a training script, and a real-time inference script using a webcam.</p>
+        <img src="s09_4d5dd32172.png" alt="File structure diagram">
       </div>
     </div>
 
+    <!-- RESULTS -->
     <div class="grid">
-      <div class="card sec" id="results">
+      <div class="card" id="results">
         <h2>Results</h2>
-        <p>The model recognizes common gestures in real time. Performance can vary with lighting conditions and hand angle.</p>
-        <p><b>Observation</b>: visually similar gestures may be occasionally misclassified.</p>
-
-        <div class="imgWrap">
-          <img class="img js-img" alt="Result and performance visual"
-               data-candidates="
-                 assets_p1/s16_06_6b8e54513e.png,
-                 assets_p1/s16_07_a28739c752.png,
-                 assets_p1/s16_24323a3a79.png,
-                 assets/p1/s16_06_6b8e54513e.png,
-                 assets/s16_06_6b8e54513e.png
-               ">
-          <div class="fallback js-fallback">
-            Image not found. If you renamed the file, update candidates to match the real filename.
-          </div>
-        </div>
+        <p>The model successfully recognizes common gestures in real time.</p>
+        <p>Performance may vary depending on lighting and hand orientation.</p>
+        <img src="s16_24323a3a79.png" alt="Inference results">
       </div>
 
       <div class="card">
         <h2>Discussion</h2>
-        <p>Real-time usability depends not only on model accuracy but also on stable input conditions (camera quality, lighting, background).</p>
-        <p>Possible improvements include more diverse training data, stronger augmentation, and experimenting with CNN-based models for better generalization.</p>
+        <p>Real-time usability depends on both model accuracy and stable input conditions.</p>
+        <p>Future work includes increasing dataset diversity and testing CNN-based models.</p>
       </div>
 
       <div class="card">
         <h2>Conclusion</h2>
-        <p>SilentBridge demonstrates a full AI development cycle and shows how gesture recognition can improve accessibility in online communication.</p>
-        <p>Future integration into online platforms could further expand its impact.</p>
+        <p>SilentBridge demonstrates a complete AI pipeline and highlights the potential of gesture recognition for accessibility.</p>
+        <p>Integration with video conferencing platforms could further enhance its impact.</p>
       </div>
     </div>
 
+    <!-- LINKS -->
     <div class="grid">
-      <div class="card sec" id="links">
+      <div class="card" id="links">
         <h2>Links</h2>
-        <p><b>GitHub:</b> <a href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">SilentBridge Repository</a></p>
-        <a class="btn" href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">Open GitHub →</a>
-        <p class="small" style="margin-top:10px">Submit this webpage link (GitHub Pages) for HW02.</p>
-      </div>
-
-      <div class="card">
-        <h2>How to Run (Summary)</h2>
-        <p class="small">Run the inference program, show your hand gesture to the webcam, and the system predicts the gesture label as text. Press <b>Q</b> to exit.</p>
-        <p class="small"><b>Command:</b> <code>python main.py</code></p>
+        <p><b>GitHub Repository:</b><br>
+        <a href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank">https://github.com/chaewoneeeeeeeeeee/SilentBridge</a></p>
       </div>
     </div>
 
@@ -269,70 +205,7 @@
       <div><b>Author:</b> Chaewon Lee</div>
       <div><b>Course:</b> EF2039 — HW02</div>
     </div>
+
   </div>
-
-  <script>
-    // Robust image loader:
-    // Tries multiple candidate paths and uses the first that exists.
-    async function urlExists(u){
-      try{
-        // Use HEAD if possible; fallback to GET if blocked.
-        const r = await fetch(u, { method: "HEAD", cache: "no-store" });
-        if (r.ok) return true;
-        const r2 = await fetch(u, { method: "GET", cache: "no-store" });
-        return r2.ok;
-      }catch(e){
-        return false;
-      }
-    }
-
-    function getRepoBase(){
-      // If hosted at https://username.github.io/repo/..., base becomes '/repo/'
-      // If hosted at https://username.github.io/..., base becomes '/'
-      const path = location.pathname; // e.g. /repo/project1.html
-      const parts = path.split("/").filter(Boolean);
-      if (parts.length >= 2) return "/" + parts[0] + "/"; // '/repo/'
-      return "/"; // root
-    }
-
-    async function loadAll(){
-      const base = getRepoBase();
-
-      const imgs = document.querySelectorAll(".js-img");
-      for (const img of imgs){
-        const wrap = img.closest(".imgWrap");
-        const fb = wrap ? wrap.querySelector(".js-fallback") : null;
-
-        const list = (img.dataset.candidates || "")
-          .split(",")
-          .map(s => s.trim())
-          .filter(Boolean);
-
-        // Try: candidate as-is, then with repo base prefix (for project pages).
-        const tries = [];
-        for (const c of list){
-          tries.push(c);
-          if (!c.startsWith("http") && !c.startsWith("/")){
-            tries.push(base + c);
-          }
-        }
-
-        let ok = false;
-        for (const u of tries){
-          if (await urlExists(u)){
-            img.src = u;
-            ok = true;
-            break;
-          }
-        }
-
-        if (!ok && fb){
-          fb.style.display = "block";
-        }
-      }
-    }
-
-    loadAll();
-  </script>
 </body>
 </html>
