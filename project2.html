@@ -1,221 +1,200 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Project 2 — Hourly Electricity Load Forecasting</title>
-  <style>
-    :root{
-      --bg0:#070b16;
-      --bg1:#0b1226;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.10);
-      --text:#e8eefc;
-      --muted:rgba(232,238,252,.72);
-      --pill:rgba(255,255,255,.08);
-      --shadow:0 22px 60px rgba(0,0,0,.55);
-      --r:18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% 0%, rgba(79,70,229,.25), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(34,197,94,.18), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-    }
-    a{color:#c7d2fe}
-    .top{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(1.4) blur(10px);
-      background:rgba(7,11,22,.55);
-      border-bottom:1px solid var(--border);
-    }
-    .nav{
-      max-width:1120px; margin:0 auto; padding:12px 16px;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-    }
-    .left{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .pill{
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--border); background:var(--pill);
-      text-decoration:none; color:var(--text);
-    }
-    .pill:hover{background:rgba(255,255,255,.12)}
-    .wrap{max-width:1120px; margin:0 auto; padding:18px 16px 80px;}
-    .grid{
-      display:grid; gap:16px;
-      grid-template-columns:1.25fr .75fr;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){.grid{grid-template-columns:1fr}}
-    .card{
-      border:1px solid var(--border);
-      border-radius:var(--r);
-      background:linear-gradient(180deg, var(--card2), var(--card));
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    h1{margin:0 0 8px; font-size:2.0rem; letter-spacing:-.02em}
-    h2{margin:0 0 10px; font-size:1.25rem}
-    p{margin:0 0 10px; line-height:1.65; color:var(--muted)}
-    .tags{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .tag{
-      display:inline-block; padding:6px 10px; border-radius:999px;
-      border:1px solid var(--border); background:rgba(255,255,255,.07);
-      font-size:.92rem;
-    }
-    .kpi{
-      display:grid; gap:12px;
-      grid-template-columns:repeat(3,1fr);
-      margin-top:14px;
-    }
-    @media (max-width: 860px){.kpi{grid-template-columns:1fr}}
-    .k{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(255,255,255,.06);
-      padding:12px;
-    }
-    .k b{display:block; font-size:1rem; color:var(--text)}
-    .k span{color:var(--muted)}
-    .wide{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(0,0,0,.18);
-      padding:12px;
-      margin-top:14px;
-    }
-    .img{
-      width:100%; height:auto;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      display:block;
-    }
-    .small{font-size:.95rem}
-    .sec{scroll-margin-top:76px}
-    .cards3{display:grid; gap:16px; grid-template-columns:repeat(3,1fr); margin-top:16px}
-    @media (max-width: 980px){.cards3{grid-template-columns:1fr}}
-    .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--border);
-      text-decoration:none;
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-    }
-    .btn:hover{background:rgba(255,255,255,.12)}
-    .foot{margin-top:18px; color:var(--muted); font-size:.92rem}
-    code{background:rgba(255,255,255,.08); padding:2px 6px; border-radius:8px; border:1px solid var(--border)}
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Project 2 — Hourly Electricity Load Forecasting</title>
+
+<style>
+:root{
+  --bg:#070b16;
+  --card:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
+  --text:#e8eefc;
+  --muted:rgba(232,238,252,.75);
+  --accent:#60a5fa;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:linear-gradient(180deg,#0b1226,#070b16);
+  color:var(--text);
+}
+a{color:var(--accent)}
+.nav{
+  position:sticky;top:0;
+  backdrop-filter:blur(10px);
+  background:rgba(7,11,22,.85);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:12px 16px;
+  display:flex;
+  justify-content:space-between;
+}
+.nav a{
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  text-decoration:none;
+  color:var(--text);
+}
+.wrap{max-width:1100px;margin:auto;padding:32px 16px 80px}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 16px 40px rgba(0,0,0,.4);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:18px;
+}
+h1{margin:0 0 8px;font-size:2.1rem}
+h2{margin:0 0 10px}
+p{margin:0 0 10px;line-height:1.65;color:var(--muted)}
+.tag{
+  display:inline-block;
+  padding:6px 10px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  margin-right:6px;
+  font-size:.85rem;
+}
+img{
+  width:100%;
+  border-radius:14px;
+  border:1px solid var(--border);
+  margin-top:10px;
+}
+.kpi{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.kpi div{
+  background:rgba(255,255,255,.08);
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+}
+@media(max-width:800px){
+  .kpi{grid-template-columns:1fr}
+}
+footer{margin-top:30px;color:var(--muted);font-size:.9rem}
+</style>
 </head>
+
 <body>
-  <div class="top">
-    <div class="nav">
-      <div class="left">
-        <a class="pill" href="index.html">← Home</a>
-        <a class="pill" href="#overview">Overview</a>
-        <a class="pill" href="#data">Data</a>
-        <a class="pill" href="#method">Method</a>
-        <a class="pill" href="#results">Results</a>
-        <a class="pill" href="#links">Links</a>
-      </div>
-      <div class="left">
-        <a class="pill" href="project1.html">← Project 1</a>
-      </div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <a href="index.html">← Home</a>
+    <a href="project1.html">Project 1</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <h1>Project 2 — Hourly Electricity Load Forecasting</h1>
+    <p>
+      Build an end-to-end machine learning pipeline to forecast hourly national
+      electricity demand for BEMS decision support.
+    </p>
+    <span class="tag">Time Series</span>
+    <span class="tag">Feature Engineering</span>
+    <span class="tag">Random Forest</span>
+
+    <div class="kpi">
+      <div><b>Model</b><br/>Random Forest Regressor</div>
+      <div><b>Main Result</b><br/>R² ≈ 0.986</div>
+      <div><b>Insight</b><br/>Temp only: R² ≈ 0.42</div>
     </div>
   </div>
 
-  <div class="wrap">
-    <!-- HERO -->
-    <div class="grid">
-      <div class="card">
-        <h1>Project 2 — Hourly Electricity Load Forecasting</h1>
-        <p class="small"><b>Goal:</b> Build an end-to-end ML pipeline to forecast hourly national electricity demand for BEMS decision support.</p>
+  <div class="grid" style="margin-top:20px">
 
-        <div class="tags">
-          <span class="tag">Time Series</span>
-          <span class="tag">Feature Engineering</span>
-          <span class="tag">Random Forest</span>
-        </div>
-
-        <div class="kpi">
-          <div class="k"><b>Key Model</b><span>Random Forest Regressor</span></div>
-          <div class="k"><b>Main Result</b><span>R² ≈ 0.986 (final model)</span></div>
-          <div class="k"><b>Insight</b><span>Temperature alone: R² ≈ 0.42</span></div>
-        </div>
-
-        <div class="wide">
-          <p class="small"><b>Why it matters:</b> Accurate load forecasting supports HVAC control, ESS scheduling, and demand-response — reducing cost and peak load. :contentReference[oaicite:1]{index=1}</p>
-        </div>
-
-        <!-- (선택) 너가 지금 막대그래프 같은 걸 넣고 싶으면 여기에 이미지로 넣어도 됨 -->
-        <!-- <img class="img" src="YOUR_BAR_CHART.png" alt="Temp alone vs Final model"> -->
-      </div>
-
-      <div class="card">
-        <img class="img" src="PREDICTION_ACTUAL_VS_PREDICTED.png" alt="Prediction results (actual vs predicted)"/>
-        <p class="foot">Prediction visualization adapted from the presentation.</p>
-      </div>
+    <div class="card">
+      <h2>Overview</h2>
+      <p>
+        Accurate load forecasting is essential for Building Energy Management
+        Systems (BEMS) to optimize HVAC control, energy storage scheduling, and
+        demand response.
+      </p>
+      <p>
+        This project evaluates how well machine learning models capture hourly
+        and daily electricity demand patterns.
+      </p>
     </div>
 
-    <!-- 3 CARDS -->
-    <div class="cards3">
-      <div class="card sec" id="overview">
-        <h2>Overview</h2>
-        <p>Building Energy Management Systems (BEMS) require reliable load prediction to operate efficiently.</p>
-        <p>This project develops a forecasting pipeline and evaluates how well ML models capture hourly and daily demand patterns. :contentReference[oaicite:2]{index=2}</p>
-      </div>
-
-      <div class="card sec" id="data">
-        <h2>Dataset & Key Observation</h2>
-        <p>Hourly dataset includes electricity demand, weather (e.g., T2M, QV2M, TQL, W2M), and calendar indicators. :contentReference[oaicite:3]{index=3}</p>
-        <p><b>Finding:</b> Temperature shows a positive trend but is not fully linear; it explains less than half of the variance (R² ≈ 0.42). :contentReference[oaicite:4]{index=4}</p>
-        <img class="img" src="TEMP_VS_LOAD.png" alt="Temperature vs load analysis"/>
-      </div>
-
-      <div class="card">
-        <h2>Why Temperature Alone Is Not Enough</h2>
-        <p>Cooling demand (summer) and heating demand (winter) both raise electricity load, creating season-dependent relationships.</p>
-        <p>Seasonal R² varies (about 0.39–0.54), so temperature is not a stable single predictor. :contentReference[oaicite:5]{index=5}</p>
-        <img class="img" src="SEASONAL_DECOMPOSITION.png" alt="Seasonal decomposition visual"/>
-      </div>
+    <div class="card">
+      <h2>Dataset & Key Observation</h2>
+      <p>
+        The dataset contains hourly electricity demand along with weather and
+        calendar variables.
+      </p>
+      <p>
+        Temperature alone explains less than half of demand variation,
+        highlighting the importance of temporal patterns.
+      </p>
+      <img src="s06_f1031f8824.png" alt="Temperature vs load analysis">
     </div>
 
-    <!-- METHOD / RESULTS / LINKS -->
-    <div class="cards3">
-      <div class="card sec" id="method">
-        <h2>Method</h2>
-        <p><b>Pipeline:</b> Data Loading → Preprocessing → Feature Engineering → Model Training → Testing → Visualization. :contentReference[oaicite:6]{index=6}</p>
-        <p>Time-based features (e.g., lag signals) help capture daily/weekly structure, improving performance beyond weather-only baselines.</p>
-        <img class="img" src="CODE_ARCHITECTURE.png" alt="Code architecture / workflow"/>
-      </div>
-
-      <div class="card sec" id="results">
-        <h2>Results</h2>
-        <p><b>Random Forest</b> achieves strong accuracy (R² ≈ 0.986). :contentReference[oaicite:7]{index=7}</p>
-        <p class="small"><b>Strength:</b> Tracks stable periods well; daily and weekly cycles are captured effectively. :contentReference[oaicite:8]{index=8}</p>
-        <p class="small"><b>Limitation:</b> Errors increase during volatile spikes; long-term dependencies may need deep models. :contentReference[oaicite:9]{index=9}</p>
-        <img class="img" src="PEAK_ERROR_EXAMPLE.png" alt="Stable vs volatile period performance"/>
-      </div>
-
-      <div class="card sec" id="links">
-        <h2>Links</h2>
-        <p><b>GitHub:</b> <a href="https://github.com/chaewoneeeeeeeeeee/EF2039_Proj02_ChaewonLee.git" target="_blank" rel="noopener">EF2039 Project 2 Repository</a> :contentReference[oaicite:10]{index=10}</p>
-        <p class="small">Future work: LSTM/GRU/Transformer, more weather/calendar features, real-time adaptive forecasting for BEMS operation. :contentReference[oaicite:11]{index=11}</p>
-        <a class="btn" href="https://github.com/chaewoneeeeeeeeeee/EF2039_Proj02_ChaewonLee.git" target="_blank" rel="noopener">Open GitHub →</a>
-
-        <div class="foot" style="margin-top:14px">
-          <div><b>Author:</b> Chaewon Lee</div>
-          <div><b>Course:</b> EF2039 — HW02</div>
-        </div>
-      </div>
+    <div class="card">
+      <h2>Method</h2>
+      <p>
+        A full pipeline including preprocessing, feature engineering, and model
+        training was constructed.
+      </p>
+      <p>
+        Lag features and calendar variables significantly improved performance.
+      </p>
+      <img src="s04_f92b6b69b5.png" alt="Feature engineering and pipeline">
     </div>
+
+    <div class="card">
+      <h2>Results</h2>
+      <p>
+        The final Random Forest model achieved strong performance, closely
+        tracking actual electricity demand.
+      </p>
+      <img src="s09_afbe3f72ac.png" alt="Prediction results">
+    </div>
+
+    <div class="card">
+      <h2>Why Temperature Alone Is Not Enough</h2>
+      <p>
+        Seasonal effects increase demand both in summer (cooling) and winter
+        (heating), making a single linear relationship insufficient.
+      </p>
+      <img src="s11_66e9161e9f.png" alt="Seasonal decomposition">
+    </div>
+
+    <div class="card">
+      <h2>Conclusion</h2>
+      <p>
+        This project demonstrates how time-series feature engineering and
+        ensemble models can significantly improve load forecasting accuracy.
+      </p>
+      <p>
+        The approach is directly applicable to real-world BEMS optimization.
+      </p>
+    </div>
+
   </div>
+
+  <footer>
+    <p><b>Author:</b> Chaewon Lee</p>
+    <p><b>Course:</b> EF2039 — HW02</p>
+  </footer>
+
+</div>
 </body>
 </html>
 
