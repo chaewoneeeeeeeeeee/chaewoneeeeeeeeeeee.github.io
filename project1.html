@@ -4,42 +4,120 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Project 1 — SilentBridge</title>
+
   <style>
-    :root {
-      --bg:#f6f8ff; --card:#ffffff; --text:#111827; --muted:#556070; --accent:#2563eb; --accent2:#10b981;
-      --border:rgba(17,24,39,.10);
+    :root{
+      --bg:#f7f9ff;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#2563eb;
+      --border:rgba(15,23,42,.10);
+      --shadow:0 16px 44px rgba(15,23,42,.10);
+      --chip:rgba(37,99,235,.08);
+      --chipText:#1e3a8a;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg, rgba(37,99,235,.08), transparent 280px), var(--bg);color:var(--text);}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 420px at 20% -10%, rgba(37,99,235,.18), transparent 60%),
+        radial-gradient(700px 360px at 80% 0%, rgba(16,185,129,.10), transparent 55%),
+        var(--bg);
+    }
     a{color:var(--accent)}
-    .top{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(10px);background:rgba(246,248,255,.8);border-bottom:1px solid var(--border);z-index:10}
-    .nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .nav .left{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.7);text-decoration:none;color:var(--text)}
+    code{background:rgba(15,23,42,.06);padding:2px 6px;border-radius:8px}
+
+    .top{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(1.4) blur(10px);
+      background:rgba(247,249,255,.82);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1040px; margin:0 auto; padding:12px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .nav .left{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .pill{
+      text-decoration:none; color:var(--text);
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.75);
+    }
     .pill:hover{background:#fff}
-    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 80px;}
-    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:stretch}
+
+    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 84px;}
+    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;align-items:stretch}
     @media (max-width: 880px){.hero{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 16px 44px rgba(17,24,39,.10)}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
     h1{margin:0 0 8px;font-size:2.1rem;letter-spacing:-.02em}
     h2{margin:0 0 10px;font-size:1.35rem}
     p{margin:0 0 10px;line-height:1.65;color:var(--muted)}
+    .small{font-size:.95rem}
     .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-size:.9rem;color:#1f2937;background:rgba(37,99,235,.06)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
-    .img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);background:#f3f4f6}
+    .tag{
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--chip); color:var(--chipText);
+      font-size:.9rem;
+    }
     .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
     @media (max-width: 720px){.kpi{grid-template-columns:1fr}}
-    .k{border:1px solid var(--border);border-radius:14px;padding:12px;background:rgba(16,185,129,.06)}
-    .k b{display:block;font-size:1.05rem;color:#0f172a}
+    .k{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background:rgba(16,185,129,.06);
+    }
+    .k b{display:block;font-size:1.05rem;color:#0b1220}
     .k span{color:var(--muted);font-size:.92rem}
-    .small{font-size:.95rem}
-    .footer{margin-top:22px;color:var(--muted);font-size:.9rem}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);text-decoration:none;background:rgba(37,99,235,.10);color:#0f172a}
-    .btn:hover{background:rgba(37,99,235,.16)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
     .sec{scroll-margin-top:76px}
+    .img{
+      width:100%; height:auto;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.04);
+      display:block;
+    }
+    .imgWrap{margin-top:10px}
+    .cap{margin-top:10px;color:var(--muted);font-size:.9rem}
+
+    .fallback{
+      display:none;
+      margin-top:10px;
+      padding:12px;
+      border-radius:14px;
+      border:1px dashed rgba(15,23,42,.25);
+      background:rgba(255,255,255,.6);
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      background:rgba(37,99,235,.10);
+      color:#0b1220;
+    }
+    .btn:hover{background:rgba(37,99,235,.16)}
+    .footer{margin-top:22px;color:var(--muted);font-size:.9rem}
   </style>
 </head>
+
 <body>
   <div class="top">
     <div class="nav">
@@ -61,20 +139,34 @@
       <div class="card">
         <h1>Project 1 — SilentBridge</h1>
         <p class="small"><b>Real-time Hand Gesture → Text</b> using a webcam-based pipeline to support communication for deaf and hard-of-hearing users in online environments.</p>
+
         <div class="meta">
           <span class="tag">Computer Vision</span>
           <span class="tag">Webcam Inference</span>
           <span class="tag">SVM Classifier</span>
         </div>
+
         <div class="kpi">
           <div class="k"><b>Goal</b><span>Convert hand gestures into text in real time</span></div>
           <div class="k"><b>Data</b><span>Collected gesture images via webcam</span></div>
           <div class="k"><b>Output</b><span>Predicted gesture label → text</span></div>
         </div>
       </div>
+
       <div class="card">
-        <img class="img" src="assets_p1/s02_9d9a17e339.png" alt="Background & problem definition visual"/>
-        <p class="footer">Visuals are adapted from the project presentation (reorganized for web readability).</p>
+        <div class="imgWrap">
+          <img class="img js-img" alt="Background & problem definition visual"
+               data-candidates="
+                 assets_p1/s02_04_9d9a17e339.png,
+                 assets_p1/s02_9d9a17e339.png,
+                 assets/p1/s02_04_9d9a17e339.png,
+                 assets/s02_04_9d9a17e339.png
+               ">
+          <div class="fallback js-fallback">
+            Image not found. Check that the image file exists in the repo and that the filename/path matches exactly (case-sensitive).
+          </div>
+        </div>
+        <div class="cap">Visuals are adapted from the project presentation (reorganized for web readability).</div>
       </div>
     </div>
 
@@ -89,35 +181,72 @@
         <h2>Method</h2>
         <p><b>Pipeline</b>: data collection → preprocessing → model training → real-time inference.</p>
         <p>Images are resized and processed into a model-friendly format. A lightweight classifier (SVM) is used for fast inference and simple deployment.</p>
-        <img class="img" src="assets_p1/s06_d8d1753695.png" alt="System / pipeline diagram"/>
+
+        <div class="imgWrap">
+          <img class="img js-img" alt="System / pipeline diagram"
+               data-candidates="
+                 assets_p1/s06_02_d8d1753695.png,
+                 assets_p1/s06_d8d1753695.png,
+                 assets/p1/s06_02_d8d1753695.png,
+                 assets/s06_02_d8d1753695.png
+               ">
+          <div class="fallback js-fallback">
+            Image not found. Confirm the file is uploaded (and path/filename matches).
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>Implementation</h2>
         <p>The project follows a clear file structure: data collection scripts, training script, and an inference script that runs with a webcam.</p>
         <p class="small">In class, a live demo was conducted to demonstrate real-time inference. This webpage focuses on summarizing the system structure and results.</p>
-        <img class="img" src="assets_p1/s09_4d5dd32172.png" alt="File structure visual"/>
+
+        <div class="imgWrap">
+          <img class="img js-img" alt="File structure visual"
+               data-candidates="
+                 assets_p1/s09_02_4d5dd32172.png,
+                 assets_p1/s09_4d5dd32172.png,
+                 assets/p1/s09_02_4d5dd32172.png,
+                 assets/s09_02_4d5dd32172.png
+               ">
+          <div class="fallback js-fallback">
+            Image not found. Confirm upload + exact filename.
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="grid">
       <div class="card sec" id="results">
         <h2>Results</h2>
-        <p>The model successfully recognizes common gestures in real time. Performance can vary with lighting conditions and hand angle.</p>
-        <p><b>Observation</b>: some gestures are more robust, while visually similar gestures may be occasionally misclassified.</p>
-        <img class="img" src="assets_p1/s16_24323a3a79.png" alt="Result and performance visual"/>
+        <p>The model recognizes common gestures in real time. Performance can vary with lighting conditions and hand angle.</p>
+        <p><b>Observation</b>: visually similar gestures may be occasionally misclassified.</p>
+
+        <div class="imgWrap">
+          <img class="img js-img" alt="Result and performance visual"
+               data-candidates="
+                 assets_p1/s16_06_6b8e54513e.png,
+                 assets_p1/s16_07_a28739c752.png,
+                 assets_p1/s16_24323a3a79.png,
+                 assets/p1/s16_06_6b8e54513e.png,
+                 assets/s16_06_6b8e54513e.png
+               ">
+          <div class="fallback js-fallback">
+            Image not found. If you renamed the file, update candidates to match the real filename.
+          </div>
+        </div>
       </div>
 
       <div class="card">
         <h2>Discussion</h2>
-        <p>Real-time usability depends not only on model accuracy but also on consistent input conditions (camera quality, lighting, background).</p>
+        <p>Real-time usability depends not only on model accuracy but also on stable input conditions (camera quality, lighting, background).</p>
         <p>Possible improvements include more diverse training data, stronger augmentation, and experimenting with CNN-based models for better generalization.</p>
       </div>
 
       <div class="card">
         <h2>Conclusion</h2>
         <p>SilentBridge demonstrates a full AI development cycle and shows how gesture recognition can improve accessibility in online communication.</p>
-        <p>Future integration into platforms like Zoom or Google Meet could further expand its impact.</p>
+        <p>Future integration into online platforms could further expand its impact.</p>
       </div>
     </div>
 
@@ -125,8 +254,8 @@
       <div class="card sec" id="links">
         <h2>Links</h2>
         <p><b>GitHub:</b> <a href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">SilentBridge Repository</a></p>
-        <p class="small">Tip: include this webpage link (GitHub Pages) when submitting HW02.</p>
         <a class="btn" href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">Open GitHub →</a>
+        <p class="small" style="margin-top:10px">Submit this webpage link (GitHub Pages) for HW02.</p>
       </div>
 
       <div class="card">
@@ -141,5 +270,69 @@
       <div><b>Course:</b> EF2039 — HW02</div>
     </div>
   </div>
+
+  <script>
+    // Robust image loader:
+    // Tries multiple candidate paths and uses the first that exists.
+    async function urlExists(u){
+      try{
+        // Use HEAD if possible; fallback to GET if blocked.
+        const r = await fetch(u, { method: "HEAD", cache: "no-store" });
+        if (r.ok) return true;
+        const r2 = await fetch(u, { method: "GET", cache: "no-store" });
+        return r2.ok;
+      }catch(e){
+        return false;
+      }
+    }
+
+    function getRepoBase(){
+      // If hosted at https://username.github.io/repo/..., base becomes '/repo/'
+      // If hosted at https://username.github.io/..., base becomes '/'
+      const path = location.pathname; // e.g. /repo/project1.html
+      const parts = path.split("/").filter(Boolean);
+      if (parts.length >= 2) return "/" + parts[0] + "/"; // '/repo/'
+      return "/"; // root
+    }
+
+    async function loadAll(){
+      const base = getRepoBase();
+
+      const imgs = document.querySelectorAll(".js-img");
+      for (const img of imgs){
+        const wrap = img.closest(".imgWrap");
+        const fb = wrap ? wrap.querySelector(".js-fallback") : null;
+
+        const list = (img.dataset.candidates || "")
+          .split(",")
+          .map(s => s.trim())
+          .filter(Boolean);
+
+        // Try: candidate as-is, then with repo base prefix (for project pages).
+        const tries = [];
+        for (const c of list){
+          tries.push(c);
+          if (!c.startsWith("http") && !c.startsWith("/")){
+            tries.push(base + c);
+          }
+        }
+
+        let ok = false;
+        for (const u of tries){
+          if (await urlExists(u)){
+            img.src = u;
+            ok = true;
+            break;
+          }
+        }
+
+        if (!ok && fb){
+          fb.style.display = "block";
+        }
+      }
+    }
+
+    loadAll();
+  </script>
 </body>
 </html>
