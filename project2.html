@@ -131,10 +131,6 @@ footer{margin-top:30px;color:var(--muted);font-size:.9rem}
         This project evaluates how well machine learning models capture hourly
         and daily electricity demand patterns.
 
-        <section id="overview">
-  <h2>Overview</h2>
-  <p>Accurate load forecasting is essential for Building Energy Management Systems (BEMS)...</p>
-
   <img class="img"
        src="s02_5885713523.png"
        alt="Modern building representing BEMS application">
@@ -150,6 +146,19 @@ footer{margin-top:30px;color:var(--muted);font-size:.9rem}
         The dataset contains hourly electricity demand along with weather and
         calendar variables.
       </p>
+     
+  <h2>Why Temperature Alone Is Not Enough</h2>
+
+  <p>
+    Exploratory analysis shows that temperature alone explains less than half
+    of the electricity demand variation (R² ≈ 0.42).
+  </p>
+
+  <img class="img"
+       src="s09_afbe3f72ac.png"
+       alt="Temperature vs electricity demand with linear fit">
+</section>
+
       <p>
         Temperature alone explains less than half of demand variation,
         highlighting the importance of temporal patterns.
