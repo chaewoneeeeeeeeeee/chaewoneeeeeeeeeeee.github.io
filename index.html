@@ -1,270 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Project 1 – AI-based BEMS for Residential Energy Optimization</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>EF2039 HW02 — Webpages</title>
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f6fb;
-      color: #222;
+    :root {
+      --bg:#0b1020; --card:#121a33; --text:#e9ecf5; --muted:#aeb6d3; --accent:#7aa2ff;
+      --border:rgba(255,255,255,.10);
     }
-    .wrapper {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 32px 16px 64px;
-      background: #ffffff;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      margin-top: 32px;
-      margin-bottom: 32px;
-      border-radius: 12px;
-    }
-    h1, h2, h3 {
-      color: #1f3c88;
-      margin-top: 0.4em;
-      margin-bottom: 0.4em;
-    }
-    h1 {
-      font-size: 2rem;
-      border-bottom: 2px solid #e0e4f2;
-      padding-bottom: 0.4em;
-    }
-    .subtitle {
-      color: #555;
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-    }
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      border-radius: 999px;
-      background: #e4ecff;
-      color: #1f3c88;
-      margin-right: 6px;
-      margin-bottom: 6px;
-    }
-    nav {
-      margin: 1rem 0 1.5rem;
-      padding: 0.75rem 1rem;
-      background: #f0f3ff;
-      border-radius: 8px;
-      font-size: 0.9rem;
-    }
-    nav a {
-      margin-right: 12px;
-      text-decoration: none;
-      color: #1f3c88;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      margin-bottom: 1.8rem;
-    }
-    p {
-      line-height: 1.6;
-      margin: 0.3rem 0 0.8rem;
-    }
-    ul {
-      margin: 0.4rem 0 0.8rem 1.2rem;
-    }
-    .highlight-box {
-      background: #f9fbff;
-      border-left: 4px solid #1f3c88;
-      padding: 0.9rem 1rem;
-      border-radius: 6px;
-      margin-top: 0.6rem;
-    }
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 12px;
-    }
-    .card {
-      background: #f7f8fd;
-      border-radius: 8px;
-      padding: 0.8rem 1rem;
-      font-size: 0.9rem;
-    }
-    .footer {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 1.2rem;
-      border-top: 1px solid #e0e4f2;
-      padding-top: 0.8rem;
-    }
-    code {
-      font-family: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
-      background: #f1f4ff;
-      padding: 2px 4px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-    }
-    a.button-link {
-      display: inline-block;
-      margin-top: 0.4rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid #1f3c88;
-      font-size: 0.8rem;
-      text-decoration: none;
-      color: #1f3c88;
-    }
-    a.button-link:hover {
-      background: #1f3c88;
-      color: #fff;
-    }
-    @media (max-width: 600px) {
-      .wrapper {
-        margin-top: 16px;
-        margin-bottom: 16px;
-        padding: 20px 14px 40px;
-      }
-      h1 {
-        font-size: 1.6rem;
-      }
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(900px 500px at 10% 10%, rgba(122,162,255,.25), transparent 60%), var(--bg);color:var(--text);}
+    .wrap{max-width:980px;margin:0 auto;padding:44px 18px 72px;}
+    h1{font-size:2.2rem;margin:0 0 10px;letter-spacing:-0.02em}
+    p{color:var(--muted);margin:0 0 18px;line-height:1.6}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-size:.85rem}
+    .title{margin:10px 0 8px;font-size:1.25rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);color:var(--text);text-decoration:none;background:rgba(122,162,255,.12)}
+    .btn:hover{background:rgba(122,162,255,.18)}
+    .foot{margin-top:28px;font-size:.9rem;color:var(--muted)}
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Project 1 – AI-based BEMS for Residential Energy Optimization</h1>
-    <div class="subtitle">
-      <strong>Student:</strong> Chaewon Lee (KENTECH, Energy Engineering)<br />
-      <strong>Course:</strong> EF2039 – Engineering Fundamentals<br />
-      <span class="badge">Building Energy</span>
-      <span class="badge">Machine Learning</span>
-      <span class="badge">Regression</span>
+  <div class="wrap">
+    <h1>EF2039 HW02 — Project Webpages</h1>
+    <p>Scrollable webpages summarizing each term project with clear structure, visuals, and links (GitHub Pages-ready).</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="tag">Project 1</span>
+        <div class="title">SilentBridge — Real-time Hand Gesture → Text</div>
+        <p>Webcam-based sign-language support system using a lightweight ML classifier and a complete pipeline (data → model → inference).</p>
+        <a class="btn" href="project1.html">Open Project 1 page →</a>
+      </div>
+
+      <div class="card">
+        <span class="tag">Project 2</span>
+        <div class="title">Hourly Electricity Load Forecasting for BEMS</div>
+        <p>End-to-end forecasting pipeline with feature engineering and model evaluation, including analysis of limitations and future work.</p>
+        <a class="btn" href="project2.html">Open Project 2 page →</a>
+      </div>
     </div>
 
-    <nav>
-      <strong>Sections:</strong>
-      <a href="#overview">Overview</a>
-      <a href="#motivation">Motivation</a>
-      <a href="#methods">Methods</a>
-      <a href="#results">Results</a>
-      <a href="#impact">Impact</a>
-      <a href="#reference">Reference</a>
-    </nav>
-
-    <section id="overview">
-      <h2>1. Project Overview</h2>
-      <p>
-        This project develops an AI-based Building Energy Management System (BEMS) model
-        that predicts hourly electricity demand in a residential building. Using historical
-        load data and time-based features, three regression models were compared and the
-        best-performing model was selected for integration into a BEMS workflow.
-      </p>
-      <div class="highlight-box">
-        <strong>Goal:</strong> Build a highly accurate, yet simple and modular forecasting
-        model that can support real-time decision-making in smart home energy management.
-      </div>
-    </section>
-
-    <section id="motivation">
-      <h2>2. Motivation</h2>
-      <p>
-        Residential buildings account for a significant share of electricity consumption.
-        However, many households still lack intelligent control of appliances, storage systems,
-        and distributed renewable resources. Accurate short-term demand forecasting is a key
-        requirement for:
-      </p>
-      <ul>
-        <li>Reducing electricity bills through peak-shifting and load control,</li>
-        <li>Improving self-consumption of rooftop solar and batteries,</li>
-        <li>Supporting grid stability in regions with high renewable penetration.</li>
-      </ul>
-    </section>
-
-    <section id="methods">
-      <h2>3. Methods</h2>
-      <p>
-        We prepared a dataset of hourly electricity demand, along with calendar features
-        such as hour of day, day of week, and whether the day is a weekend or holiday.
-        The data was split into training and test sets to evaluate generalization.
-      </p>
-      <p>The following regression models were implemented:</p>
-      <ul>
-        <li>Linear Regression – simple baseline for comparison,</li>
-        <li>Random Forest Regressor,</li>
-        <li>Gradient Boosting Regressor.</li>
-      </ul>
-      <p>
-        The code was structured as a modular pipeline with separate functions for
-        loading data, preprocessing, feature engineering, model training, and evaluation.
-        This design makes it easy to plug in new models or deploy the pipeline inside a BEMS platform.
-      </p>
-      <div class="card">
-        <strong>Example pipeline step (pseudo-code):</strong><br />
-        <code>data → preprocess() → make_features() → train_model() → evaluate()</code>
-      </div>
-    </section>
-
-    <section id="results">
-      <h2>4. Results</h2>
-      <p>
-        Model performance was evaluated using the coefficient of determination (R²) on the
-        test set. Random Forest showed the highest accuracy:
-      </p>
-
-      <div class="results-grid">
-        <div class="card">
-          <strong>Linear Regression</strong><br />
-          R² (test) ≈ 0.90<br />
-          Baseline model with limited ability to capture non-linear patterns.
-        </div>
-        <div class="card">
-          <strong>Gradient Boosting</strong><br />
-          R² (test) ≈ 0.97<br />
-          Strong performance but higher training complexity.
-        </div>
-        <div class="card">
-          <strong>Random Forest (Selected)</strong><br />
-          R² (test) = <strong>0.986</strong><br />
-          Best trade-off between accuracy, robustness, and implementation simplicity.
-        </div>
-      </div>
-
-      <p>
-        Because Random Forest can model complex interactions between features without
-        heavy hyperparameter tuning, it was selected as the final forecasting model.
-      </p>
-    </section>
-
-    <section id="impact">
-      <h2>5. Expected Impact</h2>
-      <p>
-        By integrating the selected Random Forest model into a BEMS environment, the system can:
-      </p>
-      <ul>
-        <li>Recommend optimal operation schedules for appliances and storage,</li>
-        <li>Increase the use of on-site renewable energy and reduce grid imports,</li>
-        <li>Provide households with transparent feedback on their demand patterns.</li>
-      </ul>
-      <p>
-        In the long term, this approach can be extended to community-level energy management,
-        supporting regional goals for carbon neutrality.
-      </p>
-    </section>
-
-    <section id="reference">
-      <h2>6. Reference & Contact</h2>
-      <p>
-        This webpage summarizes the term project for EF2039. The full code and analysis are
-        implemented in Python using scikit-learn.
-      </p>
-      <p>
-        <strong>Contact:</strong> Chaewon Lee – KENTECH, School of Energy Engineering<br />
-        Email: your-email@example.com
-      </p>
-      <a class="button-link" href="project2.html">Go to Project 2 &raquo;</a>
-    </section>
-
-    <div class="footer">
-      &copy; 2025 Chaewon Lee. This page was created for the EF2039 Assignment 02 (Poster &amp; Webpage).
+    <div class="foot">
+      <div><b>Author:</b> Chaewon Lee</div>
+      <div><b>Course:</b> EF2039</div>
     </div>
   </div>
 </body>

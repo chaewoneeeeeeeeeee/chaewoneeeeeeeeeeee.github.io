@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Project 1 — SilentBridge</title>
+  <style>
+    :root {
+      --bg:#f6f8ff; --card:#ffffff; --text:#111827; --muted:#556070; --accent:#2563eb; --accent2:#10b981;
+      --border:rgba(17,24,39,.10);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg, rgba(37,99,235,.08), transparent 280px), var(--bg);color:var(--text);}
+    a{color:var(--accent)}
+    .top{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(10px);background:rgba(246,248,255,.8);border-bottom:1px solid var(--border);z-index:10}
+    .nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .nav .left{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.7);text-decoration:none;color:var(--text)}
+    .pill:hover{background:#fff}
+    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 80px;}
+    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:stretch}
+    @media (max-width: 880px){.hero{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 16px 44px rgba(17,24,39,.10)}
+    h1{margin:0 0 8px;font-size:2.1rem;letter-spacing:-.02em}
+    h2{margin:0 0 10px;font-size:1.35rem}
+    p{margin:0 0 10px;line-height:1.65;color:var(--muted)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-size:.9rem;color:#1f2937;background:rgba(37,99,235,.06)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+    .img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);background:#f3f4f6}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+    @media (max-width: 720px){.kpi{grid-template-columns:1fr}}
+    .k{border:1px solid var(--border);border-radius:14px;padding:12px;background:rgba(16,185,129,.06)}
+    .k b{display:block;font-size:1.05rem;color:#0f172a}
+    .k span{color:var(--muted);font-size:.92rem}
+    .small{font-size:.95rem}
+    .footer{margin-top:22px;color:var(--muted);font-size:.9rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);text-decoration:none;background:rgba(37,99,235,.10);color:#0f172a}
+    .btn:hover{background:rgba(37,99,235,.16)}
+    .sec{scroll-margin-top:76px}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="nav">
+      <div class="left">
+        <a class="pill" href="index.html">← Home</a>
+        <a class="pill" href="#overview">Overview</a>
+        <a class="pill" href="#method">Method</a>
+        <a class="pill" href="#results">Results</a>
+        <a class="pill" href="#links">Links</a>
+      </div>
+      <div class="left">
+        <a class="pill" href="project2.html">Project 2 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="card">
+        <h1>Project 1 — SilentBridge</h1>
+        <p class="small"><b>Real-time Hand Gesture → Text</b> using a webcam-based pipeline to support communication for deaf and hard-of-hearing users in online environments.</p>
+        <div class="meta">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Webcam Inference</span>
+          <span class="tag">SVM Classifier</span>
+        </div>
+        <div class="kpi">
+          <div class="k"><b>Goal</b><span>Convert hand gestures into text in real time</span></div>
+          <div class="k"><b>Data</b><span>Collected gesture images via webcam</span></div>
+          <div class="k"><b>Output</b><span>Predicted gesture label → text</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <img class="img" src="assets_p1/s02_9d9a17e339.png" alt="Background & problem definition visual"/>
+        <p class="footer">Visuals are adapted from the project presentation (reorganized for web readability).</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card sec" id="overview">
+        <h2>Overview</h2>
+        <p>Virtual meetings and online classes are increasing, but deaf and hard-of-hearing individuals can experience communication barriers when the other person does not understand sign language.</p>
+        <p>SilentBridge addresses this gap by detecting hand gestures from a webcam feed and converting them into readable text.</p>
+      </div>
+
+      <div class="card sec" id="method">
+        <h2>Method</h2>
+        <p><b>Pipeline</b>: data collection → preprocessing → model training → real-time inference.</p>
+        <p>Images are resized and processed into a model-friendly format. A lightweight classifier (SVM) is used for fast inference and simple deployment.</p>
+        <img class="img" src="assets_p1/s06_d8d1753695.png" alt="System / pipeline diagram"/>
+      </div>
+
+      <div class="card">
+        <h2>Implementation</h2>
+        <p>The project follows a clear file structure: data collection scripts, training script, and an inference script that runs with a webcam.</p>
+        <p class="small">In class, a live demo was conducted to demonstrate real-time inference. This webpage focuses on summarizing the system structure and results.</p>
+        <img class="img" src="assets_p1/s09_4d5dd32172.png" alt="File structure visual"/>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card sec" id="results">
+        <h2>Results</h2>
+        <p>The model successfully recognizes common gestures in real time. Performance can vary with lighting conditions and hand angle.</p>
+        <p><b>Observation</b>: some gestures are more robust, while visually similar gestures may be occasionally misclassified.</p>
+        <img class="img" src="assets_p1/s16_24323a3a79.png" alt="Result and performance visual"/>
+      </div>
+
+      <div class="card">
+        <h2>Discussion</h2>
+        <p>Real-time usability depends not only on model accuracy but also on consistent input conditions (camera quality, lighting, background).</p>
+        <p>Possible improvements include more diverse training data, stronger augmentation, and experimenting with CNN-based models for better generalization.</p>
+      </div>
+
+      <div class="card">
+        <h2>Conclusion</h2>
+        <p>SilentBridge demonstrates a full AI development cycle and shows how gesture recognition can improve accessibility in online communication.</p>
+        <p>Future integration into platforms like Zoom or Google Meet could further expand its impact.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card sec" id="links">
+        <h2>Links</h2>
+        <p><b>GitHub:</b> <a href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">SilentBridge Repository</a></p>
+        <p class="small">Tip: include this webpage link (GitHub Pages) when submitting HW02.</p>
+        <a class="btn" href="https://github.com/chaewoneeeeeeeeeee/SilentBridge" target="_blank" rel="noopener">Open GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h2>How to Run (Summary)</h2>
+        <p class="small">Run the inference program, show your hand gesture to the webcam, and the system predicts the gesture label as text. Press <b>Q</b> to exit.</p>
+        <p class="small"><b>Command:</b> <code>python main.py</code></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>Author:</b> Chaewon Lee</div>
+      <div><b>Course:</b> EF2039 — HW02</div>
+    </div>
+  </div>
+</body>
+</html>
