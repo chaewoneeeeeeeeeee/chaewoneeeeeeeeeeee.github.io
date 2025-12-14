@@ -3,176 +3,286 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Project 2 — Hourly Load Forecasting</title>
+  <title>Project 2 — Electricity Load Forecasting</title>
+
   <style>
-    :root {
-      --bg:#0b1020; --card:#121a33; --text:#eef1fb; --muted:#aeb6d3; --accent:#7aa2ff; --accent2:#f59e0b;
-      --border:rgba(255,255,255,.12);
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#2563eb;
+      --border:rgba(15,23,42,.12);
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:
-      radial-gradient(900px 520px at 15% 10%, rgba(122,162,255,.22), transparent 60%),
-      radial-gradient(820px 520px at 85% 20%, rgba(245,158,11,.18), transparent 60%),
-      var(--bg);color:var(--text);}
-    a{color:var(--accent)}
-    .top{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(10px);background:rgba(11,16,32,.72);border-bottom:1px solid var(--border);z-index:10}
-    .nav{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .nav .left{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04);text-decoration:none;color:var(--text)}
-    .pill:hover{background:rgba(255,255,255,.07)}
-    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 80px;}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 16px 44px rgba(0,0,0,.35)}
-    h1{margin:0 0 8px;font-size:2.1rem;letter-spacing:-.02em}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg, rgba(37,99,235,.08), transparent 260px), var(--bg);
+      color:var(--text);
+    }
+
+    a{color:var(--accent);text-decoration:none}
+
+    .top{
+      position:sticky;top:0;z-index:10;
+      background:rgba(247,249,252,.85);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      max-width:1040px;margin:0 auto;
+      padding:12px 16px;
+      display:flex;justify-content:space-between;gap:10px;
+    }
+
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+    }
+
+    .pill:hover{background:#f1f5f9}
+
+    .wrap{max-width:1040px;margin:0 auto;padding:26px 16px 80px}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 16px 44px rgba(15,23,42,.10);
+    }
+
+    h1{margin:0 0 10px;font-size:2.1rem}
     h2{margin:0 0 10px;font-size:1.35rem}
+
     p{margin:0 0 10px;line-height:1.65;color:var(--muted)}
-    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:stretch}
-    @media (max-width: 880px){.hero{grid-template-columns:1fr}}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-size:.9rem;color:var(--muted);background:rgba(122,162,255,.10)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
-    .img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);background:#0f172a}
-    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-    @media (max-width: 720px){.kpi{grid-template-columns:1fr}}
-    .k{border:1px solid var(--border);border-radius:14px;padding:12px;background:rgba(245,158,11,.10)}
-    .k b{display:block;font-size:1.05rem;color:var(--text)}
-    .k span{color:var(--muted);font-size:.92rem}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);text-decoration:none;background:rgba(122,162,255,.12);color:var(--text)}
-    .btn:hover{background:rgba(122,162,255,.18)}
-    .small{font-size:.95rem}
-    .footer{margin-top:22px;color:var(--muted);font-size:.9rem}
-    .sec{scroll-margin-top:76px}
-    .miniChart{width:100%;border-radius:14px;border:1px solid var(--border);background:rgba(0,0,0,.18);padding:12px}
-    .miniChart svg{width:100%;height:120px}
-    .note{padding:10px 12px;border-radius:14px;border:1px dashed rgba(255,255,255,.18);background:rgba(255,255,255,.03);color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+    }
+
+    @media(max-width:880px){
+      .hero{grid-template-columns:1fr}
+    }
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      font-size:.9rem;
+      background:rgba(37,99,235,.08);
+    }
+
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;margin-top:12px;
+    }
+
+    @media(max-width:720px){
+      .kpi{grid-template-columns:1fr}
+    }
+
+    .k{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background:#f8fafc;
+    }
+
+    .k b{display:block;color:#0f172a}
+    .k span{font-size:.9rem;color:var(--muted)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+
+    img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#f1f5f9;
+    }
+
+    .footer{
+      margin-top:24px;
+      font-size:.9rem;
+      color:var(--muted);
+    }
   </style>
 </head>
+
 <body>
-  <div class="top">
-    <div class="nav">
-      <div class="left">
-        <a class="pill" href="index.html">← Home</a>
-        <a class="pill" href="#overview">Overview</a>
-        <a class="pill" href="#data">Data</a>
-        <a class="pill" href="#method">Method</a>
-        <a class="pill" href="#results">Results</a>
-        <a class="pill" href="#links">Links</a>
+
+<div class="top">
+  <div class="nav">
+    <div>
+      <a class="pill" href="index.html">← Home</a>
+      <a class="pill" href="#overview">Overview</a>
+      <a class="pill" href="#method">Method</a>
+      <a class="pill" href="#results">Results</a>
+      <a class="pill" href="#links">Links</a>
+    </div>
+    <div>
+      <a class="pill" href="project1.html">Project 1 →</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="card">
+      <h1>Project 2 — Hourly Electricity Load Forecasting</h1>
+      <p>
+        Machine learning–based forecasting of national hourly electricity demand
+        to support <b>Building Energy Management Systems (BEMS)</b>.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Time Series</span>
+        <span class="tag">Energy Data</span>
+        <span class="tag">Regression Models</span>
       </div>
-      <div class="left">
-        <a class="pill" href="project1.html">← Project 1</a>
+
+      <div class="kpi">
+        <div class="k">
+          <b>Goal</b>
+          <span>Forecast hourly electricity demand</span>
+        </div>
+        <div class="k">
+          <b>Data</b>
+          <span>Weather + calendar variables</span>
+        </div>
+        <div class="k">
+          <b>Output</b>
+          <span>Predicted electricity load</span>
+        </div>
       </div>
+    </div>
+
+    <div class="card">
+      <img src="s02_9d9a17e339.png" alt="Problem background visual">
+      <p class="footer">Visual adapted from project presentation.</p>
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="hero">
-      <div class="card">
-        <h1>Project 2 — Hourly Electricity Load Forecasting</h1>
-        <p class="small"><b>Goal:</b> build an end-to-end machine learning pipeline to forecast hourly national electricity demand for BEMS decision support.</p>
-        <div class="meta">
-          <span class="tag">Time Series</span>
-          <span class="tag">Feature Engineering</span>
-          <span class="tag">Random Forest</span>
-        </div>
-        <div class="kpi">
-          <div class="k"><b>Key Model</b><span>Random Forest Regressor</span></div>
-          <div class="k"><b>Main Result</b><span>R² ≈ 0.986 (model)</span></div>
-          <div class="k"><b>Insight</b><span>Temp alone: R² ≈ 0.42</span></div>
-        </div>
-
-        <div class="miniChart" aria-label="R2 comparison chart">
-          <div class="small" style="margin-bottom:6px;color:var(--muted)">Explaining load: Temperature alone vs Final model</div>
-          <svg viewBox="0 0 520 120" role="img">
-            <line x1="40" y1="100" x2="500" y2="100" stroke="rgba(255,255,255,.18)" />
-            <rect x="80" y="58" width="120" height="42" fill="rgba(245,158,11,.65)"></rect>
-            <rect x="320" y="12" width="120" height="88" fill="rgba(122,162,255,.70)"></rect>
-            <text x="80" y="112" fill="rgba(255,255,255,.75)" font-size="12">Temp (R² 0.42)</text>
-            <text x="320" y="112" fill="rgba(255,255,255,.75)" font-size="12">RF (R² 0.986)</text>
-          </svg>
-        </div>
-      </div>
-      <div class="card">
-        <img class="img" src="assets_p2/s09_afbe3f72ac.png" alt="Prediction results (actual vs predicted)"/>
-        <p class="footer">Prediction visualization adapted from the presentation.</p>
-      </div>
+  <!-- OVERVIEW / METHOD -->
+  <div class="grid">
+    <div class="card" id="overview">
+      <h2>Overview</h2>
+      <p>
+        Accurate electricity load forecasting is essential for optimizing HVAC
+        operation, energy storage scheduling, and reducing operational costs
+        in smart buildings.
+      </p>
+      <p>
+        This project builds a full forecasting pipeline using historical demand
+        and weather data.
+      </p>
     </div>
 
-    <div class="grid">
-      <div class="card sec" id="overview">
-        <h2>Overview</h2>
-        <p>Building Energy Management Systems (BEMS) require accurate load prediction to optimize HVAC control, ESS operation, and demand response, ultimately reducing energy cost and peak load.</p>
-        <p>This project develops a forecasting pipeline and evaluates how well machine learning models capture hourly and daily demand patterns.</p>
-      </div>
-
-      <div class="card sec" id="data">
-        <h2>Dataset & Key Observation</h2>
-        <p>The dataset contains hourly electricity demand with weather variables (e.g., temperature) and calendar/time information.</p>
-        <p>Exploratory analysis shows that temperature alone explains less than half of demand variation (R² ≈ 0.42), indicating that time/behavioral patterns are essential.</p>
-        <img class="img" src="assets_p2/s05_6e3ba3fad9.png" alt="Temperature vs load analysis"/>
-      </div>
-
-      <div class="card">
-        <h2>Why Temperature Alone Is Not Enough</h2>
-        <p>Seasonal effects can increase load both in summer (cooling) and winter (heating), meaning a single linear relationship is insufficient.</p>
-        <img class="img" src="assets_p2/s06_f1031f8824.png" alt="Seasonal decomposition visual"/>
-      </div>
+    <div class="card" id="method">
+      <h2>Method</h2>
+      <p>
+        <b>Pipeline</b>: data preprocessing → feature engineering →
+        model training → evaluation.
+      </p>
+      <p>
+        Lag features (e.g., previous-hour load) and weather variables are used
+        to capture temporal patterns.
+      </p>
+      <img src="s06_d8d1753695.png" alt="Model pipeline diagram">
     </div>
 
-    <div class="grid">
-      <div class="card sec" id="method">
-        <h2>Methodology</h2>
-        <p><b>Workflow</b>: data loading → preprocessing → feature engineering → model training → testing → visualization.</p>
-        <p>Time-series features and engineered variables help the model learn daily/weekly cycles and short-term dependencies.</p>
-        <img class="img" src="assets_p2/s07_7015062988.png" alt="Methodology pipeline"/>
-      </div>
-
-      <div class="card">
-        <h2>Code Architecture</h2>
-        <p>The implementation is modular, supporting data handling, feature engineering, model training, and plotting.</p>
-        <img class="img" src="assets_p2/s08_9407c5fe37.png" alt="Code architecture visual"/>
-      </div>
-
-      <div class="card sec" id="results">
-        <h2>Results & Discussion</h2>
-        <p>The final model tracks stable periods well and captures hourly patterns (R² ≈ 0.986). However, errors increase during volatile periods with sudden spikes.</p>
-        <div class="note small">
-          In class, the project results were presented with visual comparisons (actual vs predicted) and performance discussion.
-          This webpage focuses on clear structure, visuals, and links as required by HW02.
-        </div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <h2>Strength</h2>
-        <p>During stable periods, the model follows demand cycles closely and maintains strong predictive performance.</p>
-      </div>
-      <div class="card">
-        <h2>Limitation</h2>
-        <p>The model struggles with rapidly changing/volatile periods. Future models (LSTM/Transformer) may better capture long-term dependencies and sudden shifts.</p>
-      </div>
-      <div class="card">
-        <h2>Future Work</h2>
-        <p>Integrate deep learning approaches, richer data sources, and deployment-ready inference for BEMS operation and demand response.</p>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card sec" id="links">
-        <h2>Links</h2>
-        <p><b>GitHub:</b> <a href="https://github.com/chaewoneeeeeeeeeee/EF2039_Proj02_ChaewonLee" target="_blank" rel="noopener">EF2039 Project 2 Repository</a></p>
-        <a class="btn" href="https://github.com/chaewoneeeeeeeeeee/EF2039_Proj02_ChaewonLee" target="_blank" rel="noopener">Open GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h2>Conclusion</h2>
-        <p>This project built a functional hourly load forecasting model and confirmed that feature engineering + machine learning can effectively model electricity demand patterns.</p>
-      </div>
-    </div>
-
-    <div class="footer">
-      <div><b>Author:</b> Chaewon Lee</div>
-      <div><b>Course:</b> EF2039 — HW02</div>
+    <div class="card">
+      <h2>Implementation</h2>
+      <p>
+        Multiple regression models were implemented and compared,
+        including baseline linear regression and ensemble models.
+      </p>
+      <p>
+        Performance was evaluated using MAE and RMSE metrics.
+      </p>
+      <img src="s09_4d5dd32172.png" alt="Implementation structure">
     </div>
   </div>
+
+  <!-- RESULTS -->
+  <div class="grid" id="results">
+    <div class="card">
+      <h2>Results</h2>
+      <p>
+        The trained models successfully captured daily and seasonal demand
+        patterns.
+      </p>
+      <p>
+        Lag-based features significantly improved prediction accuracy.
+      </p>
+      <img src="s16_6b8e54513e.png" alt="Prediction results graph">
+    </div>
+
+    <div class="card">
+      <h2>Discussion</h2>
+      <p>
+        Forecast accuracy depends heavily on recent load history and weather
+        variability.
+      </p>
+      <p>
+        Future work may explore deep learning models such as LSTM or Transformers
+        for longer-term forecasting.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Conclusion</h2>
+      <p>
+        This project demonstrates how machine learning can support
+        energy-efficient building operation through accurate load forecasting.
+      </p>
+      <p>
+        The results highlight the importance of feature engineering in
+        time-series prediction.
+      </p>
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="grid" id="links">
+    <div class="card">
+      <h2>Links</h2>
+      <p>
+        <b>GitHub Repository:</b><br>
+        <a href="https://github.com/chaewoneeeeeeeeeee" target="_blank">
+          https://github.com/chaewoneeeeeeeeeee
+        </a>
+      </p>
+      <p class="footer">
+        This webpage is submitted as part of EF2039 HW02.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div><b>Author:</b> Chaewon Lee</div>
+    <div><b>Course:</b> EF2039 — HW02</div>
+  </div>
+
+</div>
 </body>
 </html>
